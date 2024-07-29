@@ -1,0 +1,6 @@
+@WuyiAPI_HostAddress = http://localhost:5005
+
+GET {{WuyiAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

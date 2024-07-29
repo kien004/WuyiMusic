@@ -1,0 +1,62 @@
+﻿@model IEnumerable<WuyiDAL.Models.UserFollowArtist>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/shared/_LayoutAdmin.cshtml";
+    // Lấy dữ liệu từ ViewData
+    var artistList = ViewData["ArtistId"] as SelectList;
+    var userList = ViewData["UserId"] as SelectList;
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FollowedAt)
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.User) *@
+                Email
+
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Artist) *@
+                Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FollowedAt)
+            </td>
+            <td>
+                @* @Html.DisplayFor(modelItem => item.User.Email) *@
+                    @foreach (var user in userList)
+                    {
+                        <div>@user.Text</div>
+                    }
+            </td>
+            <td>
+                @* @Html.DisplayFor(modelItem => item.Artist.Name) *@
+                    @foreach (var artist in artistList)
+                    {
+                        <div>@artist.Text</div>
+                    }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

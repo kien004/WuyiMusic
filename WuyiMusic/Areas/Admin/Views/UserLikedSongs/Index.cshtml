@@ -1,0 +1,60 @@
+﻿@model IEnumerable<WuyiDAL.Models.UserLikedSong>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/shared/_LayoutAdmin.cshtml";
+    var songtList = ViewData["SongId"] as SelectList;
+    var userList = ViewData["UserId"] as SelectList;
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LikedAt)
+            </th>
+            <th>
+               @*  @Html.DisplayNameFor(model => model.User) *@
+               Email
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Song) *@
+                Tittle
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LikedAt)
+            </td>
+            <td>
+                @* @Html.DisplayFor(modelItem => item.User.Email) *@
+                    @foreach (var user in userList)
+                    {
+                        <div>@user.Text</div>
+                    }
+            </td>
+            <td>
+                @* @Html.DisplayFor(modelItem => item.Song.Title) *@
+                    @foreach (var song in songtList)
+                    {
+                        <div>@song.Text</div>
+                    }
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.UserLikedSongId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.UserLikedSongId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.UserLikedSongId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
